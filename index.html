@@ -112,7 +112,8 @@
           </li>
           <li class="next">
           	  <h3>Link Traversal Query Processing (LTQP)</h3>
-			  <span class="indent">✅ Live discovery of Linked Data documents</span>
+			  <span class="indent">✅ Live discovery of Linked Data documents</span><br \>
+              <span class="indent">Compatible with Solid's document-based authorization</span>
           </li>
       </ul>
     </section>
@@ -145,6 +146,90 @@
         <li><a href="#index-background">Background</a></li>
 		<li class="current"><a href="#index-approach">Structural Assumptions for LTQP</a></li>
         <li><a href="#index-results">Experimental Results</a></li>
+      </ul>
+    </section>
+    
+    <section id="reachability" class="slide" inlist="" rel="schema:hasPart" resource="#reachability">
+      <h2 property="schema:name" style="font-size: 1.65em">No assumptions for LTQP over Linked Open Data</h2>
+      <h3>&rarr; All links need to be followed to ensure completeness!</h3>
+      <ul>
+          <li class="next">
+          	  <h3>Introduction of reachability-based completeness semantics</h3>
+			  <span class="indent" style="font-size: 0.8em">Hartig, O., Freytag, J.-C.: Foundations of Traversal based Query Execution over Linked Data</span>
+          </li>
+          <li class="next">
+          	  <h3>Reachability criteria</h3>
+			  <span class="indent">cAll: Follow all links</span><br \>
+              <span class="indent">cMatch: Follow links matching any triple patern</span><br \>
+              <span class="indent">cNone: Follow no links</span><br \>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="solid-structures" class="slide" inlist="" rel="schema:hasPart" resource="#solid-structures">
+      <h2 property="schema:name">Solid provides structural properties</h2>
+      <ul>
+          <li class="next">
+          	<h3>Linked Data Platform</h3>
+            <span class="indent">Pods implement subset of the LDP specification</span><br \>
+			<span class="indent">LDP Basic Containers: nested directories with resources</span>
+            <pre>PREFIX ldp: &lt;http://www.w3.org/ns/ldp#&gt;
+&lt;&gt; a ldp:Container, ldp:BasicContainer, ldp:Resource;
+   ldp:contains &lt;file.ttl&gt;, &lt;posts/&gt;.
+&lt;file.ttl&gt; a ldp:Resource.
+&lt;posts/&gt; a ldp:Container, ldp:BasicContainer, ldp:Resource.</pre>
+          </li>
+          <li class="next">
+          	<h3>Type Indexes</h3>
+			<span class="indent">Mapping of classes to resources containing type instances</span>
+            <pre>&lt;#ab09fd&gt; a solid:TypeRegistration;
+  solid:forClass &lt;http://example.org/Post&gt;;
+  solid:instance &lt;/public/posts.ttl&gt;.</pre>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="discovery-approaches" class="slide" inlist="" rel="schema:hasPart" resource="#discovery-approaches">
+      <h2 property="schema:name" style="font-size: 1.85em">LTQP discovery using structural assumptions</h2>
+      <ul>
+          <li class="next">
+          	<h3>Linked Data Platform</h3>
+            <span class="indent">Recurse all directories and resources to find all triples in a pod</span>
+          </li>
+          <li class="next">
+          	<h3>Type Indexes</h3>
+			<span class="indent">Based on classes in a query, find triples in resources for type mapping</span>
+            <pre>SELECT ?post WHERE {
+  ?post a &lt;http://example.org/Post&gt;;
+    &lthttp://example.org/title&gt; ?name.
+}</pre>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="architecture" class="slide" inlist="" rel="schema:hasPart" resource="#architecture">
+      <h2 property="schema:name">Pipeline-based architecture</h2>
+      <img src="img/link-queue.svg" alt="Link Queue Architecture" style="margin-top: 20px" \>
+    </section>
+    
+    <section id="implementation" class="slide" inlist="" rel="schema:hasPart" resource="#implementation">
+      <h2 property="schema:name">Implemented as modules in Comunica</h2>
+      <ul>
+          <li class="next">
+          	  <h3>Comunica is a modular SPARQL framework</h3>
+              <img src="img/comunica_red.svg" alt="Comunica" style="float: left; width: 80px" \>
+			  <span style="font-size: 0.8em">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web</span>
+          </li>
+          <li class="next">
+          	  <h3>Pluggable modules</h3>
+			  <span class="indent">Reachability criteria</span><br \>
+              <span class="indent">Solid-specific discovery approaches</span>
+          </li>
+          <li class="next">
+          	  <h3>Open-source</h3>
+			  <span class="indent"><a href="https://github.com/comunica/comunica-feature-link-traversal">https://github.com/comunica/comunica-feature-link-traversal</a></span><br \>
+              <span class="indent">Live demo: <a href="https://comunica.dev/research/link_traversal/#try-it-out">https://comunica.dev/research/link_traversal/#try-it-out</a></span>
+          </li>
       </ul>
     </section>
     
