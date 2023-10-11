@@ -76,16 +76,67 @@
         <li><a href="#index-results">Experimental Results</a></li>
       </ul>
     </section>
+    
+    <section id="solid" class="slide" inlist="" rel="schema:hasPart" resource="#solid">
+        <h2 property="schema:name">Focus on Solid</h2>
+        <center><img src="img/solid-logo.svg" alt="Solid Logo" style="height: 400px; margin: 10px" \></center>
+    </section>
+    
+    <section id="pods" class="slide" inlist="" rel="schema:hasPart" resource="#pods">
+      <h2 property="schema:name">Personal data pods</h2>
+      <h3>Full control of where your pod is stored and who can access it</h2>
+      <center>
+          <img src="img/solid-pods.svg" alt="Solid Pods" width="500px" />
+      </center>
+    </section>
+    
+    <section id="pods-storage" class="slide" inlist="" rel="schema:hasPart" resource="#pods-storage">
+      <h2 property="schema:name">Pods can store any kind of data</h2>
+      <h3>Personal data, photo's, friends, ...</h3>
+      <span>&rarr; Massive decentralization of data across documents and vaults</span>
+      <center>
+          <img src="img/pods-storage.svg" alt="Solid Pods Storage" width="450px" />
+      </center>
+    </section>
 	
-    <section id="some-slide" class="slide" inlist="" rel="schema:hasPart" resource="#some-slide">
-      <h2 property="schema:name">TODO: A regular slide</h2>
+    <section id="solid-how-query" class="slide" inlist="" rel="schema:hasPart" resource="#solid-how-query">
+      <h2 property="schema:name">How to query data from Solid pods?</h2>
       <ul>
-          <li>
-          	  <h3>A</h3>
-			  <span class="indent">TODO: Description</span>
+          <li class="next">
+          	  <h3>Centralizing all data in a single triplestore</h3>
+			  <span class="indent">❌ Privacy and legal reasons</span>
           </li>
-          <li>B</li>
-          <li>C</li>
+          <li class="next">
+          	  <h3>SPARQL Federation</h3>
+			  <span class="indent">❌ No SPARQL endpoints, authentication, large number of sources</span>
+          </li>
+          <li class="next">
+          	  <h3>Link Traversal Query Processing (LTQP)</h3>
+			  <span class="indent">✅ Live discovery of Linked Data documents</span>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="ltqp-open-data" class="slide" inlist="" rel="schema:hasPart" resource="#ltqp-open-data">
+      <h2 property="schema:name" style="font-size: 1.65em">LTQP was designed for querying Linked <em>Open</em> Data</h2>
+      <ul>
+          <li class="next">
+          	  <h3>Introduced more than a decade ago</h3>
+			  <span class="indent">Hartig, O.: SPARQL for a Web of Linked Data: Semantics and computability</span>
+          </li>
+          <li class="next">
+          	  <h3>Web of Linked Open Data as a globally distributed dataspace</h3>
+			  <span class="indent">No prior indexing in a central location</span>
+          </li>
+          <li class="next">
+          	  <h3>Follow-your-nose principle</h3>
+			  <span class="indent">Discover data <em>during</em> query execution</span>
+          </li>
+          <li class="next">
+          	  <h3>No practical usage so far</h3>
+			  <span class="indent">Due to performance concerns (large number of links, non-termination)</span><br \>
+              <span class="indent">Additional assumptions with Solid &rarr; potential for improved performance!</span>
+          </li>
       </ul>
     </section>
     
