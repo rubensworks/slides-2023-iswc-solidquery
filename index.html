@@ -76,16 +76,68 @@
         <li><a href="#index-results">Experimental Results</a></li>
       </ul>
     </section>
+    
+    <section id="solid" class="slide" inlist="" rel="schema:hasPart" resource="#solid">
+        <h2 property="schema:name">Focus on Solid</h2>
+        <center><img src="img/solid-logo.svg" alt="Solid Logo" style="height: 400px; margin: 10px" \></center>
+    </section>
+    
+    <section id="pods" class="slide" inlist="" rel="schema:hasPart" resource="#pods">
+      <h2 property="schema:name">Personal data pods</h2>
+      <h3>Full control of where your pod is stored and who can access it</h2>
+      <center>
+          <img src="img/solid-pods.svg" alt="Solid Pods" width="500px" />
+      </center>
+    </section>
+    
+    <section id="pods-storage" class="slide" inlist="" rel="schema:hasPart" resource="#pods-storage">
+      <h2 property="schema:name">Pods can store any kind of data</h2>
+      <h3>Personal data, photo's, friends, ...</h3>
+      <span>&rarr; Massive decentralization of data across documents and vaults</span>
+      <center>
+          <img src="img/pods-storage.svg" alt="Solid Pods Storage" width="450px" />
+      </center>
+    </section>
 	
-    <section id="some-slide" class="slide" inlist="" rel="schema:hasPart" resource="#some-slide">
-      <h2 property="schema:name">TODO: A regular slide</h2>
+    <section id="solid-how-query" class="slide" inlist="" rel="schema:hasPart" resource="#solid-how-query">
+      <h2 property="schema:name">How to query data from Solid pods?</h2>
       <ul>
-          <li>
-          	  <h3>A</h3>
-			  <span class="indent">TODO: Description</span>
+          <li class="next">
+          	  <h3>Centralizing all data in a single triplestore</h3>
+			  <span class="indent">❌ Privacy and legal reasons</span>
           </li>
-          <li>B</li>
-          <li>C</li>
+          <li class="next">
+          	  <h3>SPARQL Federation</h3>
+			  <span class="indent">❌ No SPARQL endpoints, authentication, large number of sources</span>
+          </li>
+          <li class="next">
+          	  <h3>Link Traversal Query Processing (LTQP)</h3>
+			  <span class="indent">✅ Live discovery of Linked Data documents</span><br \>
+              <span class="indent">Compatible with Solid's document-based authorization</span>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="ltqp-open-data" class="slide" inlist="" rel="schema:hasPart" resource="#ltqp-open-data">
+      <h2 property="schema:name" style="font-size: 1.65em">LTQP was designed for querying Linked <em>Open</em> Data</h2>
+      <ul>
+          <li class="next">
+          	  <h3>Introduced more than a decade ago</h3>
+			  <span class="indent">Hartig, O.: SPARQL for a Web of Linked Data: Semantics and computability</span>
+          </li>
+          <li class="next">
+          	  <h3>Web of Linked Open Data as a globally distributed dataspace</h3>
+			  <span class="indent">No prior indexing in a central location</span>
+          </li>
+          <li class="next">
+          	  <h3>Follow-your-nose principle</h3>
+			  <span class="indent">Discover data <em>during</em> query execution</span>
+          </li>
+          <li class="next">
+          	  <h3>No practical usage so far</h3>
+			  <span class="indent">Due to performance concerns (large number of links, non-termination)</span><br \>
+              <span class="indent">Additional assumptions with Solid &rarr; potential for improved performance!</span>
+          </li>
       </ul>
     </section>
     
@@ -94,6 +146,90 @@
         <li><a href="#index-background">Background</a></li>
 		<li class="current"><a href="#index-approach">Structural Assumptions for LTQP</a></li>
         <li><a href="#index-results">Experimental Results</a></li>
+      </ul>
+    </section>
+    
+    <section id="reachability" class="slide" inlist="" rel="schema:hasPart" resource="#reachability">
+      <h2 property="schema:name" style="font-size: 1.65em">No assumptions for LTQP over Linked Open Data</h2>
+      <h3>&rarr; All links need to be followed to ensure completeness!</h3>
+      <ul>
+          <li class="next">
+          	  <h3>Introduction of reachability-based completeness semantics</h3>
+			  <span class="indent" style="font-size: 0.8em">Hartig, O., Freytag, J.-C.: Foundations of Traversal based Query Execution over Linked Data</span>
+          </li>
+          <li class="next">
+          	  <h3>Reachability criteria</h3>
+			  <span class="indent">cAll: Follow all links</span><br \>
+              <span class="indent">cMatch: Follow links matching any triple patern</span><br \>
+              <span class="indent">cNone: Follow no links</span><br \>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="solid-structures" class="slide" inlist="" rel="schema:hasPart" resource="#solid-structures">
+      <h2 property="schema:name">Solid provides structural properties</h2>
+      <ul>
+          <li class="next">
+          	<h3>Linked Data Platform</h3>
+            <span class="indent">Pods implement subset of the LDP specification</span><br \>
+			<span class="indent">LDP Basic Containers: nested directories with resources</span>
+            <pre>PREFIX ldp: &lt;http://www.w3.org/ns/ldp#&gt;
+&lt;&gt; a ldp:Container, ldp:BasicContainer, ldp:Resource;
+   ldp:contains &lt;file.ttl&gt;, &lt;posts/&gt;.
+&lt;file.ttl&gt; a ldp:Resource.
+&lt;posts/&gt; a ldp:Container, ldp:BasicContainer, ldp:Resource.</pre>
+          </li>
+          <li class="next">
+          	<h3>Type Indexes</h3>
+			<span class="indent">Mapping of classes to resources containing type instances</span>
+            <pre>&lt;#ab09fd&gt; a solid:TypeRegistration;
+  solid:forClass &lt;http://example.org/Post&gt;;
+  solid:instance &lt;/public/posts.ttl&gt;.</pre>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="discovery-approaches" class="slide" inlist="" rel="schema:hasPart" resource="#discovery-approaches">
+      <h2 property="schema:name" style="font-size: 1.85em">LTQP discovery using structural assumptions</h2>
+      <ul>
+          <li class="next">
+          	<h3>Linked Data Platform</h3>
+            <span class="indent">Recurse all directories and resources to find all triples in a pod</span>
+          </li>
+          <li class="next">
+          	<h3>Type Indexes</h3>
+			<span class="indent">Based on classes in a query, find triples in resources for type mapping</span>
+            <pre>SELECT ?post WHERE {
+  ?post a &lt;http://example.org/Post&gt;;
+    &lthttp://example.org/title&gt; ?name.
+}</pre>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="architecture" class="slide" inlist="" rel="schema:hasPart" resource="#architecture">
+      <h2 property="schema:name">Pipeline-based architecture</h2>
+      <img src="img/link-queue.svg" alt="Link Queue Architecture" style="margin-top: 20px" \>
+    </section>
+    
+    <section id="implementation" class="slide" inlist="" rel="schema:hasPart" resource="#implementation">
+      <h2 property="schema:name">Implemented as modules in Comunica</h2>
+      <ul>
+          <li class="next">
+          	  <h3>Comunica is a modular SPARQL framework</h3>
+              <img src="img/comunica_red.svg" alt="Comunica" style="float: left; width: 80px" \>
+			  <span style="font-size: 0.8em">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web</span>
+          </li>
+          <li class="next">
+          	  <h3>Pluggable modules</h3>
+			  <span class="indent">Reachability criteria</span><br \>
+              <span class="indent">Solid-specific discovery approaches</span>
+          </li>
+          <li class="next">
+          	  <h3>Open-source</h3>
+			  <span class="indent"><a href="https://github.com/comunica/comunica-feature-link-traversal">https://github.com/comunica/comunica-feature-link-traversal</a></span><br \>
+              <span class="indent">Live demo: <a href="https://comunica.dev/research/link_traversal/#try-it-out">https://comunica.dev/research/link_traversal/#try-it-out</a></span>
+          </li>
       </ul>
     </section>
     
