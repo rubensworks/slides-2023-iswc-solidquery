@@ -166,7 +166,7 @@
       </ul>
     </section>
     
-    <section id="solid-structures" class="slide" inlist="" rel="schema:hasPart" resource="#solid-structures">
+    <section id="solid-structures" class="slide" inlist="" rel="schema:hasPart" resource="#solid-structures" style="font-size: 0.95em">
       <h2 property="schema:name">Solid provides structural properties</h2>
       <ul>
           <li>
@@ -214,10 +214,10 @@
     
     <section id="implementation" class="slide" inlist="" rel="schema:hasPart" resource="#implementation">
       <h2 property="schema:name">Implemented as modules in Comunica</h2>
+      <img src="img/comunica_red.svg" alt="Comunica" style="float: right; width: 250px" \>
       <ul>
           <li>
           	  <h3>Comunica is a modular SPARQL framework</h3>
-              <img src="img/comunica_red.svg" alt="Comunica" style="float: left; width: 80px" \>
 			  <span style="font-size: 0.8em">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web</span>
           </li>
           <li>
@@ -330,7 +330,7 @@
     </section>
     
     <section id="query-plan-bottleneck" class="slide" inlist="" rel="schema:hasPart" resource="#query-plan-bottleneck">
-      <h2 property="schema:name">Query plan is the bottleneck</h2>
+      <h2 property="schema:name">Query plans are the bottleneck</h2>
       <ul>
           <li>
           	  <h3>We use zero-knowledge query planning</h3>
@@ -353,7 +353,22 @@
     </section>
 	
     <section id="conclusion" class="slide" inlist="" rel="schema:hasPart" resource="#conclusion">
-      <h2 property="schema:name" class="big">TODO: Conclusion</h2>
+      <h2 property="schema:name" class="big">Conclusion</h2>
+      <ul>
+          <li>
+          	  <h3>LTQP is relevant for decentralized environments</h3>
+              <span class="indent">Non-complex queries can be answered in the order of seconds</span>
+          </li>
+          <li>
+          	  <h3>Completeness can be guaranteed in scope of pods</h3>
+              <span class="indent">Due to structural properties of Solid</span>
+          </li>
+          <li>
+          	  <h3>Future work is needed for more complex queries</h3>
+              <span class="indent">Better (adaptive?) query planning</span><br \>
+              <span class="indent">More selective reachability criteria</span>
+          </li>
+      </ul>
     </section>
 
     <footer>
