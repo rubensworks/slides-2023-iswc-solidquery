@@ -121,19 +121,19 @@
     <section id="ltqp-open-data" class="slide" inlist="" rel="schema:hasPart" resource="#ltqp-open-data">
       <h2 property="schema:name" style="font-size: 1.65em">LTQP was designed for querying Linked <em>Open</em> Data</h2>
       <ul>
-          <li class="next">
+          <li>
           	  <h3>Introduced more than a decade ago</h3>
 			  <span class="indent">Hartig, O.: SPARQL for a Web of Linked Data: Semantics and computability</span>
           </li>
-          <li class="next">
+          <li>
           	  <h3>Web of Linked Open Data as a globally distributed dataspace</h3>
 			  <span class="indent">No prior indexing in a central location</span>
           </li>
-          <li class="next">
+          <li>
           	  <h3>Follow-your-nose principle</h3>
 			  <span class="indent">Discover data <em>during</em> query execution</span>
           </li>
-          <li class="next">
+          <li>
           	  <h3>No practical usage so far</h3>
 			  <span class="indent">Due to performance concerns (large number of links, non-termination)</span><br \>
               <span class="indent">Additional assumptions with Solid &rarr; potential for improved performance!</span>
@@ -153,11 +153,11 @@
       <h2 property="schema:name" style="font-size: 1.65em">No assumptions for LTQP over Linked Open Data</h2>
       <h3>&rarr; All links need to be followed to ensure completeness!</h3>
       <ul>
-          <li class="next">
+          <li>
           	  <h3>Introduction of reachability-based completeness semantics</h3>
 			  <span class="indent" style="font-size: 0.8em">Hartig, O., Freytag, J.-C.: Foundations of Traversal based Query Execution over Linked Data</span>
           </li>
-          <li class="next">
+          <li>
           	  <h3>Reachability criteria</h3>
 			  <span class="indent">cAll: Follow all links</span><br \>
               <span class="indent">cMatch: Follow links matching any triple patern</span><br \>
@@ -169,7 +169,7 @@
     <section id="solid-structures" class="slide" inlist="" rel="schema:hasPart" resource="#solid-structures">
       <h2 property="schema:name">Solid provides structural properties</h2>
       <ul>
-          <li class="next">
+          <li>
           	<h3>Linked Data Platform</h3>
             <span class="indent">Pods implement subset of the LDP specification</span><br \>
 			<span class="indent">LDP Basic Containers: nested directories with resources</span>
@@ -179,7 +179,7 @@
 &lt;file.ttl&gt; a ldp:Resource.
 &lt;posts/&gt; a ldp:Container, ldp:BasicContainer, ldp:Resource.</pre>
           </li>
-          <li class="next">
+          <li>
           	<h3>Type Indexes</h3>
 			<span class="indent">Mapping of classes to resources containing type instances</span>
             <pre>&lt;#ab09fd&gt; a solid:TypeRegistration;
@@ -192,11 +192,11 @@
     <section id="discovery-approaches" class="slide" inlist="" rel="schema:hasPart" resource="#discovery-approaches">
       <h2 property="schema:name" style="font-size: 1.85em">LTQP discovery using structural assumptions</h2>
       <ul>
-          <li class="next">
+          <li>
           	<h3>Linked Data Platform</h3>
             <span class="indent">Recurse all directories and resources to find all triples in a pod</span>
           </li>
-          <li class="next">
+          <li>
           	<h3>Type Indexes</h3>
 			<span class="indent">Based on classes in a query, find triples in resources for type mapping</span>
             <pre>SELECT ?post WHERE {
@@ -215,17 +215,17 @@
     <section id="implementation" class="slide" inlist="" rel="schema:hasPart" resource="#implementation">
       <h2 property="schema:name">Implemented as modules in Comunica</h2>
       <ul>
-          <li class="next">
+          <li>
           	  <h3>Comunica is a modular SPARQL framework</h3>
               <img src="img/comunica_red.svg" alt="Comunica" style="float: left; width: 80px" \>
 			  <span style="font-size: 0.8em">Taelman, R., Van Herwegen, J., Vander Sande, M., Verborgh, R.: Comunica: a Modular SPARQL Query Engine for the Web</span>
           </li>
-          <li class="next">
+          <li>
           	  <h3>Pluggable modules</h3>
 			  <span class="indent">Reachability criteria</span><br \>
               <span class="indent">Solid-specific discovery approaches</span>
           </li>
-          <li class="next">
+          <li>
           	  <h3>Open-source</h3>
 			  <span class="indent"><a href="https://github.com/comunica/comunica-feature-link-traversal">https://github.com/comunica/comunica-feature-link-traversal</a></span><br \>
               <span class="indent">Live demo: <a href="https://comunica.dev/research/link_traversal/#try-it-out">https://comunica.dev/research/link_traversal/#try-it-out</a></span>
@@ -238,6 +238,109 @@
         <li><a href="#index-background">Background</a></li>
 		<li><a href="#index-approach">Structural Assumptions for LTQP</a></li>
         <li class="current"><a href="#index-results">Experimental Results</a></li>
+      </ul>
+    </section>
+    
+    <section id="benchmark" class="slide" inlist="" rel="schema:hasPart" resource="#benchmark" style="font-size: 0.9em">
+      <h2 property="schema:name">We experiment using SolidBench</h2>
+      <img src="img/solidbench.png" alt="SolidBench" style="float: right; width: 200px" \>
+      <ul>
+          <li>
+          	  <h3>SolidBench: simulated Solid environment</h3>
+			  <span class="indent">Derived from LDBC's Social Network Benchmark dataset</span><br \>
+          </li>
+          <li>
+          	  <h3>Large number of files and pods</h3>
+			  <span class="indent">158.233 RDF files across 1.531 pods (configurable)</span><br \>
+              <span class="indent">Variation in file fragmentation</span>
+          </li>
+          <li>
+          	  <h3>27 query templates</h3>
+			  <span class="indent">Grouped by 3 categories: short, complex, discover</span>
+          </li>
+          <li>
+          	  <h3>18 combinations of query engine configuration</h3>
+			  <span class="indent"><strong>Structural assumptions</strong>: None, LDP, Type Index, Filtered Type Index,</span><br \>
+              <span class="indent">LDP + Type Index, LDP + Filtered Type Index</span><br \>
+              <span class="indent"><strong>Reachability criteria</strong>: cNone, cMatch, cAll</span>
+          </li>
+      </ul>
+    </section>
+
+    <section id="query-types" class="slide" inlist="" rel="schema:hasPart" resource="#query-types">
+      <h2 property="schema:name">Not all queries can be answered before the timeout</h2>
+      <ul>
+          <li>
+          	  <h3>Discover queries achieve full accuracy</h3>
+			  <span class="indent">Only 0,86% timeout</span><br \>
+              <span class="indent"><strong>First result:</strong> 0,925 seconds</span><br \>
+              <span class="indent"><strong>Last result:</strong> 2,372 seconds</span><br \>
+              <span class="indent"><strong>Results:</strong> 39,13</span>
+          </li>
+          <li>
+          	  <h3>Half of the short queries timeout (55,61%)</h3>
+              <span class="indent">Cross-pod queries cause (too) many links to be followed</span>
+          </li>
+          <li>
+          	  <h3>All of the complex queries timeout</h3>
+              <span class="indent">Many triple patterns slow down query execution</span>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="intra-inter-vault" class="slide" inlist="" rel="schema:hasPart" resource="#intra-inter-vault">
+      <h2 property="schema:name">Structural assumptions <em>and</em> reachability criteria are necessary</h2>
+      <ul>
+          <li>
+          	  <h3>Structural assumptions can handle intra-pod queries</h3>
+			  <span class="indent">Most combinations achieve highest levels of result accuracy (99+%)</span>
+          </li>
+          <li>
+          	  <h3>Reachability criteria are also needed for inter-pod queries</h3>
+			  <span class="indent">Structural assumptions can achieve completeness within one pod</span>
+              <span class="indent">Reachability criteria can hop across pods</span>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="difference-structural-http" class="slide" inlist="" rel="schema:hasPart" resource="#difference-structural-http">
+      <h2 property="schema:name">Structural assumptions lead to difference in HTTP requests</h2>
+      <center>
+          <img src="img/queries_indexvsstorage_http_relative.svg" alt="Plot showing relative http requests" style="width: 100%" \>
+      </center>
+      <ul>
+          <li>
+          	  <h3>HTTP requests for type index significantly lower than LDP</h3>
+          </li>
+      </ul>
+    </section>
+    
+    <section id="similar-structural" class="slide" inlist="" rel="schema:hasPart" resource="#similar-structural">
+      <h2 property="schema:name">Structural assumptions perform similarly</h2>
+      <center>
+          <img src="img/queries_indexvsstorage_time_relative.svg" alt="Plot showing relative execution times" style="width: 100%" \>
+      </center>
+      <ul>
+          <li>
+          	  <h3>No significant difference in execution time</h3>
+              <span class="indent">HTTP requests not main bottleneck for discover queries</span>
+              <!-- Structural assumptions and reachability criteria sufficiently selective for discover queries -->
+          </li>
+      </ul>
+    </section>
+    
+    <section id="query-plan-bottleneck" class="slide" inlist="" rel="schema:hasPart" resource="#query-plan-bottleneck">
+      <h2 property="schema:name">Query plan is the bottleneck</h2>
+      <ul>
+          <li>
+          	  <h3>We use zero-knowledge query planning</h3>
+              <span class="indent">No cardinality information available before execution</span><br \>
+              <span class="indent" style="font-size: 0.65em">Hartig, O.: Zero-knowledge query planning for an iterator implementation of link traversal based query execution.</span>
+          </li>
+          <li>
+          	  <h3>Better query plan can make discover queries 2 times faster</h3>
+              <span class="indent">Based on experiment with theoretically optimal query plan</span>
+          </li>
       </ul>
     </section>
     
