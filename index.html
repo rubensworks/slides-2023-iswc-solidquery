@@ -93,7 +93,7 @@
     <section id="pods-storage" class="slide" inlist="" rel="schema:hasPart" resource="#pods-storage">
       <h2 property="schema:name">Pods can store any kind of data</h2>
       <h3>Personal data, photo's, friends, ...</h3>
-      <span>&rarr; Massive decentralization of data across documents and vaults</span>
+      <span>&rarr; Massive decentralization of data across documents and pods</span>
       <center>
           <img src="img/pods-storage.svg" alt="Solid Pods Storage" width="450px" />
       </center>
@@ -198,7 +198,7 @@
           </li>
           <li>
           	<h3>Type Indexes</h3>
-			<span class="indent">Based on classes in a query, find triples in resources for type mapping</span>
+			<span class="indent">Based on classes in a query, find triples in documents for type mapping</span>
             <pre>SELECT ?post WHERE {
   ?post a &lt;http://example.org/Post&gt;;
     &lthttp://example.org/title&gt; ?name.
